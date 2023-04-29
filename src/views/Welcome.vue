@@ -4,9 +4,9 @@
     <Dialog
       v-if="showDialog"
       title="About"
-      message="This site was built by a team of Year 5 students at NUS High School,
-      composed of Lee Jia Jie, Tan Kai Xun Dave, Lim Teck Kong and Prannaya
-      Gupta, with support from the NUS High Students' Council and AppVenture,
+      message="This site was built by a team of Year 4 and Year 6 students at NUS High School,
+      composed of Lee Jia Jie, Tan Yong Tat, Vadapalli Dedeep Sai, and Tan Kai Xun Dave
+       with support from the NUS High Students' Council and AppVenture,
       the Computer Science Interest Group of NUS High."
       @close="showDialog = false"
     />
@@ -24,7 +24,7 @@
     <MyButton text="Microsoft login" :onClick="login" />
     <div class="spacer"></div>
     <span class="credits" @click="showDialog = true">
-      By Jia Jie, Yong Tat
+      By Jia Jie, Yong Tat, Sai, Dave
     </span>
   </div>
 </template>

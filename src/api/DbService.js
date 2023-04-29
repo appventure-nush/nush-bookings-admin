@@ -32,7 +32,7 @@ export default {
       const result = await signInWithPopup(auth, provider);
       return result;
     } catch (error) {
-      console.error(error);
+      return error;
     }
   },
 };
