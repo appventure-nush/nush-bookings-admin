@@ -1,7 +1,8 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory } from "vue-router";
 // import { getAuth } from 'firebase/auth';
-import TourView from './views/TourView.vue';
-import ManageBookings from './views/ManageBookings.vue';
+import TourView from "./views/TourView.vue";
+import ManageBookings from "./views/ManageBookings.vue";
+import AddParticipants from "./views/AddParticipants.vue";
 
 const routes = [
   // {
@@ -9,11 +10,15 @@ const routes = [
   //   component: WelcomeView,
   // },
   {
-    path: '/home',
+    path: "/add",
+    component: AddParticipants,
+  },
+  {
+    path: "/home",
     component: ManageBookings,
   },
   {
-    path: '/open-house-tour',
+    path: "/open-house-tour",
     component: TourView,
   },
 ];
