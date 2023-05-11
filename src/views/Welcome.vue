@@ -49,7 +49,7 @@ export default {
         const result = await DbService.microsoftLogin();
         router.push('/manage-bookings');
       } catch (error) {
-        console.error(error);
+        console.error();
       }
     };
     return { showDialog, login };

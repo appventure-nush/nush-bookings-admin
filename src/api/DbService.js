@@ -1,8 +1,11 @@
 import { initializeApp } from 'firebase/app';
 import {
   getFirestore,
+  collection,
+  getDocs,
   doc,
   getDoc,
+  addDoc,
   updateDoc,
   deleteDoc,
   setDoc,
@@ -33,6 +36,34 @@ export default {
       return result;
     } catch (error) {
       return error;
+    }
+  },
+  async getParticipants(tourGroup) {
+    const bookingsRef = collection(db, `tourGroups/${tourGroup}/bookings`);
+    const snapshot = await getDocs(bookingsRef);
+    const names = [];
+    snapshot.forEach((doc) => {
+      names.push(doc.data().name);
+    });
+    return names;
+  },
+  async addParticipant(tourGroup, participantName, participantPax) {
+    const timeslotsRef = doc(db, 'tourGroups', 'slotsLeft');
+    const timeslotsSnapshot = await getDoc(timeslotsRef);
+    const paxLeft = timeslotsSnapshot.data()[tourGroup];
+    if (paxLeft >= participantPax) {
+      const bookingsRef = collection(db, `tourGroups/${tourGroup}/bookings`);
+      const bookingData = {
+        name: participantName,
+        pax: participantPax,
+      };
+      const bookingRes = await addDoc(bookingsRef, bookingData);
+      const timeslotsRes = await updateDoc(timeslotsRef, {
+        [tourGroup]: paxLeft - participantPax,
+      });
+      return bookingRes && timeslotsRes;
+    } else {
+      throw 'No pax left';
     }
   },
 };
