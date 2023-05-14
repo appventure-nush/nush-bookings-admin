@@ -8,9 +8,9 @@ import { RouterView } from 'vue-router';
 export default {
   name: 'App',
   components: {
-    RouterView
-  }
-}
+    RouterView,
+  },
+};
 </script>
 
 <style>
@@ -47,5 +47,29 @@ html {
   /* line-height: 1.2; */
   -webkit-tap-highlight-color: transparent;
   color: white;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+/* to fix fullscreen issue on mobile */
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+/* for dialog transition */
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 400ms ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>

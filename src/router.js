@@ -1,13 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
 // import { getAuth } from 'firebase/auth';
+import WelcomeView from './views/WelcomeView.vue';
 import TourView from './views/TourView.vue';
 import ManageBookings from './views/ManageBookings.vue';
 
 const routes = [
-  // {
-  //   path: '/',
-  //   component: WelcomeView,
-  // },
+  {
+    path: '/',
+    component: WelcomeView,
+  },
   {
     path: '/home',
     component: ManageBookings,
