@@ -3,11 +3,16 @@ import { createRouter, createWebHistory } from 'vue-router';
 import WelcomeView from './views/WelcomeView.vue';
 import TourView from './views/TourView.vue';
 import ManageBookings from './views/ManageBookings.vue';
+import AddParticipants from './views/AddParticipants.vue';
 
 const routes = [
   {
     path: '/',
     component: WelcomeView,
+  },
+  {
+    path: '/add',
+    component: AddParticipants,
   },
   {
     path: '/home',
