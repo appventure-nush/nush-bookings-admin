@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-// import { getAuth } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import WelcomeView from './views/WelcomeView.vue';
 import TourView from './views/TourView.vue';
 import ManageBookings from './views/ManageBookings.vue';
@@ -29,20 +29,20 @@ const router = createRouter({
   routes,
 });
 
-// router.beforeEach((to, from, next) => {
-//   getAuth().onAuthStateChanged(
-//     (user) => {
-//       if (user == null) {
-//         if (to.path !== '/') next('/');
-//         else next();
-//       } else {
-//         // is authenticated
-//         if (to.path === '/') next('/home');
-//         else next();
-//       }
-//     },
-//     (error) => {}
-//   );
-// });
+router.beforeEach((to, from, next) => {
+  getAuth().onAuthStateChanged(
+    (user) => {
+      if (user == null) {
+        if (to.path !== '/') next('/');
+        else next();
+      } else {
+        // is authenticated
+        if (to.path === '/') next('/home');
+        else next();
+      }
+    },
+    (error) => {}
+  );
+});
 
 export default router;
