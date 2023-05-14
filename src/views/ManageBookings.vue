@@ -1,26 +1,38 @@
 <template>
   <div id="bg">
     <h1 id="gradient-text">Manage bookings</h1>
-    <div class="modal">
+    <div class="modal" @click="$router.push('/open-house-tour')">
       <h2>Open house tour</h2>
-      <p>31/04/23</p>
+      <p>20/05/23</p>
     </div>
-    <p id="signed-in">Signed in as (Not yet logged in)</p>
+    <p id="signed-in">Signed in as {{ name }}</p>
     <button id="sign-out" @click="signOut">Sign out</button>
   </div>
 </template>
 
 <script>
-const signOut = function () {
-  alert('You have been signed out.');
-  window.location.href = '/';
-};
+import { getAuth } from 'firebase/auth';
+
+function toTitleCase(s) {
+  return s.replace(/\w\S*/g, function (txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
+}
 
 export default {
   name: 'ManageBookings',
   components: {},
+  data() {
+    const user = getAuth().currentUser;
+    return {
+      name: toTitleCase(user.displayName),
+    };
+  },
   methods: {
-    signOut,
+    async signOut() {
+      await getAuth().signOut();
+      this.$router.push('/');
+    },
   },
 };
 </script>
@@ -44,6 +56,12 @@ export default {
   border-radius: 10px;
   padding: 3vw 4vw;
   color: white;
+  transition: background-color 200ms ease-in-out;
+}
+
+.modal:active {
+  border-color: transparent;
+  background-color: #444444;
 }
 
 .modal h2 {

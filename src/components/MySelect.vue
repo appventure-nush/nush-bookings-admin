@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <select :modelValue="modelValue" @update:modelValue="$emit('update:modelValue', $event)">
-      <option value="" disabled selected hidden>{{ placeholder }}</option>
+    <select :value="modelValue" @input="$emit('update:modelValue', $event.target.value)">
+      <!-- <option value="" disabled selected hidden>{{ placeholder }}</option> -->
       <option v-for="option in options" :key="option" :value="option">
         {{ option }}
       </option>

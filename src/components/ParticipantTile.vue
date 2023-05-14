@@ -1,36 +1,34 @@
 <template>
-  <div class="participant-tile" :class="{ present }">
-    <div class="checkbox" @click="present = !present">
+  <div class="participant-tile" :class="{ present }" @click="present = !present">
+    <div class="checkbox">
       <i class="checkmark s16 filled"></i>
     </div>
     <div class="details">
       <span class="name">{{ name }}</span>
       <span class="group-size">{{ groupSize }} {{ groupSize === 1 ? 'person' : 'people' }}</span>
     </div>
-    <i class="delete s24 regular"></i>
+    <i class="delete s24 regular" @click.stop="$emit('delete')"></i>
   </div>
 </template>
 
 <script>
 export default {
   props: {
+    bookingId: String,
     name: String,
     groupSize: Number,
   },
   data() {
     return {
-      present: false,
-    }
-  },
-  mounted() {
-    this.present = localStorage.getItem(this.name + this.groupSize) === 'true'
+      present: localStorage.getItem(this.bookingId) === 'true',
+    };
   },
   watch: {
     present() {
-      localStorage.setItem(this.name + this.groupSize, this.present)
-    }
-  }
-}
+      localStorage.setItem(this.bookingId, this.present);
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -75,7 +73,7 @@ i.checkmark:before {
   font-size: 14px;
 }
 
-.participant-tile.present>.checkbox {
+.participant-tile.present > .checkbox {
   background-color: white;
 }
 
@@ -86,17 +84,17 @@ i.checkmark:before {
   flex-grow: 1;
 }
 
-.details>.name {
+.details > .name {
   font-size: 16px;
   font-weight: 700;
   margin-bottom: 6px;
 }
 
-.details>.group-size {
+.details > .group-size {
   font-size: 12px;
 }
 
 i.delete:active {
-  color: #D42727;
+  color: #d42727;
 }
 </style>

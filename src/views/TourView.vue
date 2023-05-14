@@ -1,15 +1,34 @@
 <template>
+  <Transition>
+    <Dialog
+      is-yes-no
+      v-if="showDialog"
+      title="Are you sure??"
+      :message="`Do you want to cancel ${bookingToDelete.name}'s booking? They will have to book again!`"
+      @yes="confirmDeleteBooking"
+      @no="showDialog = false"
+    />
+  </Transition>
   <div class="tour-view">
     <h1>Open house tour</h1>
     <div class="select-tour-row">
-      <my-select v-model="tourTime" placeholder="Select time" :options="['2.00pm', '2.10pm']" />
-      <my-select v-model="routeName" placeholder="Route" :options="['Route A', 'Route B']" />
+      <my-select v-model="tourTime" placeholder="Select time" :options="TIMINGS" />
+      <my-select v-model="groupId" placeholder="Group" :options="TOURGROUPS" />
     </div>
     <h2>Participants ({{ numParticipants }}/12)</h2>
-    <participant-tile name="Testing" :group-size="4" />
-    <participant-tile name="Another group" :group-size="3" />
-    <participant-tile name="Dave" :group-size="1" />
-    <my-button class="fab" text="Add people" :on-click="() => { }" />
+    <participant-tile
+      v-for="booking in bookings"
+      :key="booking.id"
+      :booking-id="booking.id"
+      :name="booking.name"
+      :group-size="booking.pax"
+      @delete="askDelete(booking)"
+    />
+    <my-button
+      class="fab"
+      text="Add people"
+      :on-click="() => $router.push({ path: '/add', query: { tourTime, groupId } })"
+    />
   </div>
 </template>
 
@@ -17,18 +36,68 @@
 import MySelect from '@/components/MySelect.vue';
 import ParticipantTile from '@/components/ParticipantTile.vue';
 import MyButton from '@/components/MyButton.vue';
+import Dialog from '@/components/Dialog.vue';
+import DbService from '@/api/DbService';
+
+const TIMINGS = [
+  900, 915, 930, 945, 1000, 1015, 1030, 1045, 1100, 1115, 1130, 1145,
+  //
+  1200, 1210, 1220, 1230, 1240, 1250, 1300, 1310, 1320, 1330, 1340, 1350, 1400, 1410, 1420, 1430, 1440, 1450, 1500,
+  1510, 1520, 1530,
+].map((num) => num.toString());
+const TOURGROUPS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
 
 export default {
   name: 'TourViews',
-  components: { MySelect, ParticipantTile, MyButton },
+  components: { MySelect, ParticipantTile, MyButton, Dialog },
   data() {
     return {
-      tourTime: '',
-      routeName: '',
-      numParticipants: 0,
-    }
-  }
-}
+      TIMINGS,
+      TOURGROUPS,
+      tourTime: localStorage.getItem('tourTime') || '',
+      groupId: localStorage.getItem('groupId') || '',
+      bookings: [],
+      showDialog: false,
+      bookingToDelete: null,
+    };
+  },
+  watch: {
+    tourTime() {
+      localStorage.setItem('tourTime', this.tourTime);
+      this.refreshParticipantsList();
+    },
+    groupId() {
+      localStorage.setItem('groupId', this.groupId);
+      this.refreshParticipantsList();
+    },
+  },
+  computed: {
+    numParticipants() {
+      return this.bookings.reduce((acc, curr) => acc + curr.pax, 0);
+    },
+  },
+  mounted() {
+    this.refreshParticipantsList();
+  },
+  methods: {
+    async refreshParticipantsList() {
+      this.bookings = await DbService.getParticipants(this.tourTime + '_' + this.groupId);
+    },
+    askDelete(booking) {
+      this.bookingToDelete = booking;
+      this.showDialog = true;
+    },
+    async confirmDeleteBooking() {
+      await DbService.cancelBooking(
+        this.tourTime + '_' + this.groupId,
+        this.bookingToDelete.id,
+        this.bookingToDelete.pax
+      );
+      this.showDialog = false;
+      this.bookingToDelete = null;
+    },
+  },
+};
 </script>
 
 <style scoped>

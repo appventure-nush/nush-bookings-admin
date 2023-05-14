@@ -21,27 +21,33 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .number-select {
+  width: 100%;
   display: flex;
   gap: 12px;
 }
 
 .number {
-  padding: 12px 12px 8px 12px;
+  flex-grow: 1;
+  padding-top: 12px;
+  padding-bottom: 8px;
   border: 1px solid #5f5f5f;
   border-radius: 10px;
   cursor: pointer;
   user-select: none;
+  display: grid;
+  place-items: center;
 
-  color: rgba(white, 0.8);
+  color: rgba(255, 255, 255, 0.8);
   font-size: 24px;
   font-weight: 700;
+  transition: background-color 200ms ease-in-out;
+}
 
-  &.selected {
-    color: white;
-    border-color: transparent;
-    background-color: #444;
-  }
+.number.selected {
+  color: white;
+  border-color: transparent;
+  background-color: #444;
 }
 </style>

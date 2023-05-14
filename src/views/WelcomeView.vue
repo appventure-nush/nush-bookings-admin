@@ -13,7 +13,7 @@
   </Transition>
   <div class="welcome">
     <img src="@/assets/school_logo.png" height="54" width="100" />
-    <h1>NUS High School Tour</h1>
+    <h1>NUS High Bookings</h1>
     <p>
       This page is intended for use by tour guides of the open house tour. It contains information on the participants
       registered for each route, and allows guides to sign up on behalf of senior citizens who are less technically
@@ -44,7 +44,7 @@ export default {
     const login = async () => {
       try {
         const result = await DbService.microsoftLogin();
-        router.push('/manage-bookings');
+        router.push('/home');
       } catch (error) {
         console.error();
       }
