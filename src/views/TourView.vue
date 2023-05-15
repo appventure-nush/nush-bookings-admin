@@ -93,6 +93,7 @@ export default {
         this.bookingToDelete.id,
         this.bookingToDelete.pax
       );
+      this.bookings = this.bookings.filter((booking) => booking.id !== this.bookingToDelete.id);
       this.showDialog = false;
       this.bookingToDelete = null;
     },
