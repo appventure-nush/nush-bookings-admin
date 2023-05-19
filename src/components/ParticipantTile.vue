@@ -70,7 +70,7 @@ i.checkmark {
 }
 
 i.checkmark:before {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .participant-tile.present > .checkbox {
@@ -85,13 +85,13 @@ i.checkmark:before {
 }
 
 .details > .name {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   margin-bottom: 6px;
 }
 
 .details > .group-size {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 i.delete:active {

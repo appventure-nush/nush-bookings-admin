@@ -43,7 +43,7 @@ export default {
 }
 
 #gradient-text {
-  font-size: 7vw;
+  font-size: 7.2vw;
   font-family: Avenir;
   background: linear-gradient(45deg, #00a499, #003f3b);
   -webkit-background-clip: text;
@@ -65,19 +65,19 @@ export default {
 }
 
 .modal h2 {
-  font-size: 4vw;
+  font-size: 4.2vw;
   font-family: Avenir;
   margin-bottom: 1vh;
 }
 
 .modal p {
-  font-size: 3vw;
+  font-size: 3.2vw;
   font-family: Avenir;
   color: #848484;
 }
 
 #signed-in {
-  font-size: 3.5vw;
+  font-size: 3.7vw;
   font-family: Avenir;
   color: #848484;
   position: absolute;
@@ -91,7 +91,7 @@ export default {
   border-radius: 5px;
   padding: 2vw 3vw;
   color: white;
-  font-size: 3.5vw;
+  font-size: 3.7vw;
   font-family: Avenir;
   position: absolute;
   bottom: 3vh;

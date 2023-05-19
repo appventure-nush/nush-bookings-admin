@@ -41,13 +41,13 @@ export default {
 }
 
 h1 {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   margin-bottom: 12px;
 }
 
 p {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   margin-bottom: 28px;
 }
@@ -63,7 +63,7 @@ p {
   height: 36px;
   display: grid;
   place-items: center;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   cursor: pointer;
   user-select: none;

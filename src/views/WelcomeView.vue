@@ -31,7 +31,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import DbService from '@/api/DbService.js';
 import MyButton from '@/components/MyButton.vue';
-import Dialog from '@/components/Dialog.vue';
+import Dialog from '@/components/MyDialog.vue';
 
 export default {
   components: {
@@ -67,7 +67,7 @@ h1 {
   margin-top: 68px;
   margin-bottom: 36px;
   margin-right: 64px;
-  font-size: 32px;
+  font-size: 34px;
   font-weight: 700;
   background-image: linear-gradient(45deg, #00a499, #003f3b);
   background-size: 100%;
@@ -80,13 +80,13 @@ h1 {
 
 p {
   color: rgba(255, 255, 255, 0.8);
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
 }
 
 .credits {
   color: rgba(255, 255, 255, 0.4);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
 }
 </style>

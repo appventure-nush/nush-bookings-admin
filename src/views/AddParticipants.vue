@@ -66,7 +66,7 @@ export default {
 
 h1 {
   margin-bottom: 20px;
-  font-size: 32px;
+  font-size: 34px;
   font-weight: 700;
   background-image: linear-gradient(45deg, #00a499, #006760);
   background-size: 100%;
@@ -79,13 +79,13 @@ h1 {
 
 h3 {
   margin-bottom: 40px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
 }
 
 p {
   margin-bottom: 8px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 550;
   opacity: 60%;
 }

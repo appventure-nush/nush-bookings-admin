@@ -29,7 +29,7 @@ input {
   outline: none;
   border: none;
   color: white;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
 }
 
@@ -39,7 +39,7 @@ input.error {
 
 .error-msg {
   color: #d42727;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   margin-top: 12px;
   margin-left: 12px;

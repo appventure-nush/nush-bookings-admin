@@ -34,7 +34,7 @@ select {
   border: none;
   color: white;
   height: 40px;
-  font-size: 14px;
+  font-size: 16px;
   padding-left: 18px;
   padding-right: 40px;
   background-color: #333;

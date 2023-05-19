@@ -29,27 +29,27 @@ i.filled:before {
 }
 
 i.s12:before {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 i.s16:before {
-  font-size: 16px;
+  font-size: 18px;
 }
 
 i.s20:before {
-  font-size: 20px;
-}
-
-i.s24:before {
   font-size: 22px;
 }
 
+i.s24:before {
+  font-size: 24px;
+}
+
 i.s28:before {
-  font-size: 28px;
+  font-size: 30px;
 }
 
 i.s32:before {
-  font-size: 32px;
+  font-size: 34px;
 }
 
 i.white {

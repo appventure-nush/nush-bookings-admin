@@ -40,7 +40,7 @@ export default {
   place-items: center;
 
   color: rgba(255, 255, 255, 0.8);
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
   transition: background-color 200ms ease-in-out;
 }

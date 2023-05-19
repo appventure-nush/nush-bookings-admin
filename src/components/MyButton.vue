@@ -55,7 +55,7 @@ export default {
   place-items: center;
   border-radius: 14px;
   color: black;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   user-select: none;
   cursor: pointer;

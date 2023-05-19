@@ -36,7 +36,7 @@
 import MySelect from '@/components/MySelect.vue';
 import ParticipantTile from '@/components/ParticipantTile.vue';
 import MyButton from '@/components/MyButton.vue';
-import Dialog from '@/components/Dialog.vue';
+import Dialog from '@/components/MyDialog.vue';
 import DbService from '@/api/DbService';
 
 const TIMINGS = [
@@ -109,7 +109,7 @@ export default {
 }
 
 h1 {
-  font-size: 32px;
+  font-size: 34px;
   background: linear-gradient(45deg, #00a499, #003f3b);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -123,7 +123,7 @@ h1 {
 }
 
 h2 {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   margin-bottom: 24px;
 }
