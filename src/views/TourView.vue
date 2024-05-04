@@ -18,70 +18,15 @@
       <my-select v-model="groupId" placeholder="Group" :options="TOURGROUPS" />
     </div>
     <div class="tour-columns">
-      <div class="participants-column">
-        <h2>A1 Participants ({{ calculateParticipants(arr[0]) }}/12)</h2>
+      <div class="participants-column" v-for="(groupId, idx) in TOURGROUPS" :key="groupId">
+        <h2>{{ groupId }} Participants ({{ calculateParticipants(arr[idx]) }}/12)</h2>
       <participant-tile
-        v-for="booking in arr[0]"
+        v-for="booking in arr[idx]"
         :key="booking.id"
         :booking-id="booking.id"
         :name="booking.name"
         :group-size="booking.pax"
-        @delete="askDelete(booking, 'A1')"
-      />
-      </div>
-      <div class="participants-column">
-        <h2>A2 Participants ({{ calculateParticipants(arr[1]) }}/12)</h2>
-      <participant-tile
-        v-for="booking in arr[1]"
-        :key="booking.id"
-        :booking-id="booking.id"
-        :name="booking.name"
-        :group-size="booking.pax"
-        @delete="askDelete(booking, 'A2')"
-      />
-      </div>
-      <div class="participants-column">
-        <h2>B1 Participants ({{ calculateParticipants(arr[2]) }}/12)</h2>
-      <participant-tile
-        v-for="booking in arr[2]"
-        :key="booking.id"
-        :booking-id="booking.id"
-        :name="booking.name"
-        :group-size="booking.pax"
-        @delete="askDelete(booking, 'B1')"
-      />
-      </div>
-      <div class="participants-column">
-        <h2>B2 Participants ({{ calculateParticipants(arr[3]) }}/12)</h2>
-      <participant-tile
-        v-for="booking in arr[3]"
-        :key="booking.id"
-        :booking-id="booking.id"
-        :name="booking.name"
-        :group-size="booking.pax"
-        @delete="askDelete(booking, 'B2')"
-      />
-      </div>
-      <div class="participants-column">
-        <h2>C1 Participants ({{ calculateParticipants(arr[4]) }}/12)</h2>
-      <participant-tile
-        v-for="booking in arr[4]"
-        :key="booking.id"
-        :booking-id="booking.id"
-        :name="booking.name"
-        :group-size="booking.pax"
-        @delete="askDelete(booking, 'C1')"
-      />
-      </div>
-      <div class="participants-column">
-        <h2>C2 Participants ({{ calculateParticipants(arr[5]) }}/12)</h2>
-      <participant-tile
-        v-for="booking in arr[5]"
-        :key="booking.id"
-        :booking-id="booking.id"
-        :name="booking.name"
-        :group-size="booking.pax"
-        @delete="askDelete(booking, 'C2')"
+        @delete="askDelete(booking, groupId)"
       />
       </div>
     </div>
