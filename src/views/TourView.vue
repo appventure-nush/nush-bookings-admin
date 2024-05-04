@@ -12,18 +12,81 @@
   <div class="tour-view">
     <h1>Open house tour</h1>
     <div class="select-tour-row">
+      <p>Timing: </p>
       <my-select v-model="tourTime" placeholder="Select time" :options="TIMINGS" />
+      <p>Add to Group: </p>
       <my-select v-model="groupId" placeholder="Group" :options="TOURGROUPS" />
     </div>
-    <h2>Participants ({{ numParticipants }}/12)</h2>
-    <participant-tile
-      v-for="booking in bookings"
-      :key="booking.id"
-      :booking-id="booking.id"
-      :name="booking.name"
-      :group-size="booking.pax"
-      @delete="askDelete(booking)"
-    />
+    <div class="tour-columns">
+      <div class="participants-column">
+        <h2>A1 Participants ({{ calculateParticipants(arr[0]) }}/12)</h2>
+      <participant-tile
+        v-for="booking in arr[0]"
+        :key="booking.id"
+        :booking-id="booking.id"
+        :name="booking.name"
+        :group-size="booking.pax"
+        @delete="askDelete(booking, 'A1')"
+      />
+      </div>
+      <div class="participants-column">
+        <h2>A2 Participants ({{ calculateParticipants(arr[1]) }}/12)</h2>
+      <participant-tile
+        v-for="booking in arr[1]"
+        :key="booking.id"
+        :booking-id="booking.id"
+        :name="booking.name"
+        :group-size="booking.pax"
+        @delete="askDelete(booking, 'A2')"
+      />
+      </div>
+      <div class="participants-column">
+        <h2>B1 Participants ({{ calculateParticipants(arr[2]) }}/12)</h2>
+      <participant-tile
+        v-for="booking in arr[2]"
+        :key="booking.id"
+        :booking-id="booking.id"
+        :name="booking.name"
+        :group-size="booking.pax"
+        @delete="askDelete(booking, 'B1')"
+      />
+      </div>
+      <div class="participants-column">
+        <h2>B2 Participants ({{ calculateParticipants(arr[3]) }}/12)</h2>
+      <participant-tile
+        v-for="booking in arr[3]"
+        :key="booking.id"
+        :booking-id="booking.id"
+        :name="booking.name"
+        :group-size="booking.pax"
+        @delete="askDelete(booking, 'B2')"
+      />
+      </div>
+      <div class="participants-column">
+        <h2>C1 Participants ({{ calculateParticipants(arr[4]) }}/12)</h2>
+      <participant-tile
+        v-for="booking in arr[4]"
+        :key="booking.id"
+        :booking-id="booking.id"
+        :name="booking.name"
+        :group-size="booking.pax"
+        @delete="askDelete(booking, 'C1')"
+      />
+      </div>
+      <div class="participants-column">
+        <h2>C2 Participants ({{ calculateParticipants(arr[5]) }}/12)</h2>
+      <participant-tile
+        v-for="booking in arr[5]"
+        :key="booking.id"
+        :booking-id="booking.id"
+        :name="booking.name"
+        :group-size="booking.pax"
+        @delete="askDelete(booking, 'C2')"
+      />
+      </div>
+    </div>
+    
+    
     <my-button
       class="fab"
       text="Add people"
@@ -57,6 +120,7 @@ export default {
       tourTime: localStorage.getItem('tourTime') || '',
       groupId: localStorage.getItem('groupId') || '',
       bookings: [],
+      arr: [],
       showDialog: false,
       bookingToDelete: null,
     };
@@ -81,9 +145,13 @@ export default {
   },
   methods: {
     async refreshParticipantsList() {
-      this.bookings = await DbService.getParticipants(this.tourTime + '_' + this.groupId);
+      this.arr = []
+      for (let i = 0; i < this.TOURGROUPS.length; i++) {
+        this.arr.push(await DbService.getParticipants(this.tourTime + '_' + this.TOURGROUPS[i]));
+      }
     },
-    askDelete(booking) {
+    askDelete(booking, group) {
+      this.groupId = group;
       this.bookingToDelete = booking;
       this.showDialog = true;
     },
@@ -93,10 +161,16 @@ export default {
         this.bookingToDelete.id,
         this.bookingToDelete.pax
       );
-      this.bookings = this.bookings.filter((booking) => booking.id !== this.bookingToDelete.id);
       this.showDialog = false;
       this.bookingToDelete = null;
+      location.reload()
     },
+    calculateParticipants(participantsArr) {
+      if(typeof participantsArr !== "undefined") {
+        return participantsArr.reduce((acc, curr) => acc + curr.pax, 0);
+      }
+      return 0
+    }
   },
 };
 </script>
@@ -119,7 +193,19 @@ h1 {
 .select-tour-row {
   display: flex;
   column-gap: 12px;
-  margin-bottom: 54px;
+  margin-bottom: 24px;
+  align-items: center;
+}
+
+.tour-columns {
+  display: flex;
+  column-gap: 12px;
+}
+
+.participants-column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 16.666667%;
 }
 
 h2 {
