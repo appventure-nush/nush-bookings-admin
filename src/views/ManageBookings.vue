@@ -2,8 +2,8 @@
   <div id="bg">
     <h1 id="gradient-text">Manage bookings</h1>
     <div class="modal" @click="$router.push('/open-house-tour')">
-      <h2>Open house tour</h2>
-      <p>20/05/23</p>
+      <h2>Open House Tour</h2>
+      <p>11/05/24</p>
     </div>
     <p id="signed-in">Signed in as {{ name }}</p>
     <button id="sign-out" @click="signOut">Sign out</button>
